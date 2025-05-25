@@ -180,6 +180,7 @@ def reset_db():
     db.drop_all()
     db.create_all()
 
+    # Re-seed sample data
     db.session.add(MenuItem(
         name="Truffle Tagliatelle",
         description="Hand-cut egg pasta with black truffle butter.",
@@ -212,39 +213,37 @@ def reset_db():
 
 
 # --- START APP ---
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+with app.app_context():
+    db.create_all()
 
-        # Seed sample data only once
-        if not MenuItem.query.all():
-            db.session.add(MenuItem(
-                name="Truffle Tagliatelle",
-                description="Hand-cut egg pasta with black truffle butter.",
-                price=12.00,
-                vegetarian=True,
-                image_filename='dish-truffle-tagliatelle.jpg'
-            ))
-            db.session.add(MenuItem(
-                name="Carbonara",
-                description="Guanciale, pecorino, cracked black pepper.",
-                price=10.50,
-                image_filename='dish-carbonara.jpg'
-            ))
-            db.session.add(MenuItem(
-                name="Pesto Trofie",
-                description="Ligurian pasta with basil pesto and burrata cheese.",
-                price=9.50,
-                vegetarian=True,
-                image_filename='dish-pesto-trofie.jpg'
-            ))
-            db.session.add(MenuItem(
-                name="Garlic Bread",
-                description="Sourdough with garlic herb butter.",
-                price=3.50,
-                image_filename='dish-garlic-bread.jpg'
-            ))
-            db.session.commit()
+    if not MenuItem.query.all():
+        db.session.add(MenuItem(
+            name="Truffle Tagliatelle",
+            description="Hand-cut egg pasta with black truffle butter.",
+            price=12.00,
+            vegetarian=True,
+            image_filename='dish-truffle-tagliatelle.jpg'
+        ))
+        db.session.add(MenuItem(
+            name="Carbonara",
+            description="Guanciale, pecorino, cracked black pepper.",
+            price=10.50,
+            image_filename='dish-carbonara.jpg'
+        ))
+        db.session.add(MenuItem(
+            name="Pesto Trofie",
+            description="Ligurian pasta with basil pesto and burrata cheese.",
+            price=9.50,
+            vegetarian=True,
+            image_filename='dish-pesto-trofie.jpg'
+        ))
+        db.session.add(MenuItem(
+            name="Garlic Bread",
+            description="Sourdough with garlic herb butter.",
+            price=3.50,
+            image_filename='dish-garlic-bread.jpg'
+        ))
+        db.session.commit()
 
     # Use $PORT if available (on hosting platforms), else fallback to 5000
     port = int(os.environ.get("PORT", 5000))
