@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Find Pastalux in Luxembourg today! Check our schedule and live locations to enjoy fresh artisanal pasta on the go."/>
+  <title>Pastalux Locations | Where to Find Us</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E27358',   // Terra Cotta
+            secondary: '#6C917B', // Sage Green
+            accent: '#F4C042',    // Saffron Yellow
+            dark: '#2D2D2D',
+            light: '#F9F8F7'
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico"/>
+
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat :wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- OG Tags / SEO -->
+  <meta property="og:title" content="Pastalux Locations - Where to Find Us" />
+  <meta property="og:description" content="Check our daily schedule and live locations to find Pastalux's gourmet pasta truck in Luxembourg." />
+  <meta property="og:image" content="/images/og-locations.jpg" />
+  <meta property="og:url" content="https://pastalux.lu/locations.html " />
+</head>
+<body class="bg-light text-dark font-sans leading-relaxed">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="{{ url_for('home') }}" class="text-2xl font-serif font-bold text-primary">Pastalux</a>
+    <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+      <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+      <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+      <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+      <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+      <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+      </nav>
+      <button id="mobile-menu-toggle" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-inner">
+      <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+      <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+      <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+      <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+      <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-16 bg-cover bg-center" style="background-image: url('/images/hero-truck-in-city.jpg');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center text-white">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Where to Find Us</h1>
+      <p class="text-xl max-w-xl mx-auto">Track our gourmet pasta truck across Luxembourg — today and beyond.</p>
+    </div>
+  </section>
+
+  <!-- Interactive Map Embed -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-8">Live Truck Map</h2>
+      <div class="w-full h-96 rounded-lg overflow-hidden shadow-md">
+        <!-- Replace with your actual Google Maps Embed URL -->
+        <iframe 
+          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=21%20Rue%20Marguerite%20de%20Brabant,%201254%20Hollerich%20Luxembourg+(Pastalux)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Pastalux Live Location Map"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekly Schedule -->
+  <section class="py-16 bg-light">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Weekly Schedule</h2>
+      
+      <!-- Desktop Table View -->
+      <div class="hidden md:block overflow-x-auto">
+        <table class="w-full table-auto border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Location</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Time</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Special Dish</th>
+              <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Directions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Monday</td>
+              <td class="px-6 py-4">Grand Place, Luxembourg City</td>
+              <td class="px-6 py-4">11:00 AM – 3:00 PM</td>
+              <td class="px-6 py-4">Lemon Ricotta Ravioli</td>
+              <td class="px-6 py-4 text-right">
+                <a href="https://maps.google.com/?q=Grand%20Place%20Luxembourg " target="_blank" class="text-primary hover:underline">Get Directions</a>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Tuesday</td>
+              <td class="px-6 py-4">Kirchberg Office District</td>
+              <td class="px-6 py-4">11:30 AM – 2:30 PM</td>
+              <td class="px-6 py-4">Truffle Tagliatelle</td>
+              <td class="px-6 py-4 text-right">
+                <a href="https://maps.google.com/?q=Kirchberg%20Luxembourg " target="_blank" class="text-primary hover:underline">Get Directions</a>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Wednesday</td>
+              <td class="px-6 py-4">Place d’Armes, Esch-sur-Alzette</td>
+              <td class="px-6 py-4">12:00 PM – 4:00 PM</td>
+              <td class="px-6 py-4">Luxembourg Ragu</td>
+              <td class="px-6 py-4 text-right">
+                <a href="https://maps.google.com/?q=Esch-sur-Alzette " target="_blank" class="text-primary hover:underline">Get Directions</a>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Thursday</td>
+              <td class="px-6 py-4">Belval Plaza</td>
+              <td class="px-6 py-4">11:00 AM – 3:00 PM</td>
+              <td class="px-6 py-4">Carbonara</td>
+              <td class="px-6 py-4 text-right">
+                <a href="https://maps.google.com/?q=Belval%20Plaza " target="_blank" class="text-primary hover:underline">Get Directions</a>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Friday</td>
+              <td class="px-6 py-4">Gare de Luxembourg</td>
+              <td class="px-6 py-4">7:00 AM – 10:00 AM<br>11:30 AM – 2:30 PM</td>
+              <td class="px-6 py-4">Pesto Trofie</td>
+              <td class="px-6 py-4 text-right">
+                <a href="https://maps.google.com/?q=Gare%20de%20Luxembourg " target="_blank" class="text-primary hover:underline">Get Directions</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile List View -->
+      <div class="md:hidden space-y-6">
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="font-bold text-lg">Mon, Apr 7</h3>
+          <p class="text-gray-700">Grand Place, Luxembourg City</p>
+          <p class="text-sm text-gray-500 mt-1">11:00 AM – 3:00 PM</p>
+          <p class="mt-2 italic text-sm">Special: Lemon Ricotta Ravioli</p>
+          <a href="https://maps.google.com/?q=Grand%20Place%20Luxembourg " target="_blank" class="inline-block mt-2 text-xs text-primary hover:underline">Get Directions</a>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="font-bold text-lg">Tue, Apr 8</h3>
+          <p class="text-gray-700">Kirchberg Office District</p>
+          <p class="text-sm text-gray-500 mt-1">11:30 AM – 2:30 PM</p>
+          <p class="mt-2 italic text-sm">Special: Truffle Tagliatelle</p>
+          <a href="https://maps.google.com/?q=Kirchberg%20Luxembourg " target="_blank" class="inline-block mt-2 text-xs text-primary hover:underline">Get Directions</a>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="font-bold text-lg">Wed, Apr 9</h3>
+          <p class="text-gray-700">Place d’Armes, Esch-sur-Alzette</p>
+          <p class="text-sm text-gray-500 mt-1">12:00 PM – 4:00 PM</p>
+          <p class="mt-2 italic text-sm">Special: Luxembourg Ragu</p>
+          <a href="https://maps.google.com/?q=Esch-sur-Alzette " target="_blank" class="inline-block mt-2 text-xs text-primary hover:underline">Get Directions</a>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="font-bold text-lg">Thu, Apr 10</h3>
+          <p class="text-gray-700">Belval Plaza</p>
+          <p class="text-sm text-gray-500 mt-1">11:00 AM – 3:00 PM</p>
+          <p class="mt-2 italic text-sm">Special: Carbonara</p>
+          <a href="https://maps.google.com/?q=Belval%20Plaza " target="_blank" class="inline-block mt-2 text-xs text-primary hover:underline">Get Directions</a>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="font-bold text-lg">Fri, Apr 11</h3>
+          <p class="text-gray-700">Gare de Luxembourg</p>
+          <p class="text-sm text-gray-500 mt-1">7:00 AM – 10:00 AM<br>11:30 AM – 2:30 PM</p>
+          <p class="mt-2 italic text-sm">Special: Pesto Trofie</p>
+          <a href="https://maps.google.com/?q=Gare%20de%20Luxembourg " target="_blank" class="inline-block mt-2 text-xs text-primary hover:underline">Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification Signup -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-serif font-bold mb-6">Never Miss Our Truck!</h2>
+      <p class="text-lg mb-8 max-w-xl mx-auto">Subscribe to receive alerts whenever we’re near you.</p>
+      <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
+        <input type="email" placeholder="Enter your email" required class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary outline-none">
+        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-lg transition duration-300">Notify Me</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-4">Pastalux</h3>
+        <p class="text-gray-300">Gourmet artisanal pasta made fresh daily in Luxembourg. Italian craft with local soul.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="{{ url_for('home') }}" class="text-gray-300 hover:text-white">Home</a></li>
+          <li><a href="{{ url_for('menu') }}" class="text-gray-300 hover:text-white">Menu</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-white">Locations</a></li>
+          <li><a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white">About</a></li>
+          <li><a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="mt-4 text-gray-400">Stay updated with our latest stops and specials.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Pastalux. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous"></script>
+
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      var menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

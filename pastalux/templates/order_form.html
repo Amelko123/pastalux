@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Place Your Order | Pastalux</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+  <!-- Custom Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E27358',
+            secondary: '#6C917B',
+            accent: '#F4C042',
+            dark: '#2D2D2D',
+            light: '#F9F8F7'
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat :wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light text-dark font-sans leading-relaxed">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="{{ url_for('home') }}" class="text-2xl font-serif font-bold text-primary">Pastalux</a>
+      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+        <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+        <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+        <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+        <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+        <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-16 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='images/hero-pasta-closeup.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center text-white">
+      <h1 class="text-4xl font-serif font-bold mb-4">Order Your Pasta</h1>
+      <p class="text-xl max-w-xl mx-auto">Choose your dishes, add your details, and we'll get your gourmet pasta ready for pickup.</p>
+    </div>
+  </section>
+
+  <!-- Order Form Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <h2 class="text-3xl font-serif font-bold mb-8">Your Order</h2>
+      <form method="post" action="/order" class="space-y-6">
+        
+        <!-- Customer Name -->
+        <div>
+          <label class="block font-medium mb-2">Full Name</label>
+          <input type="text" name="customer_name" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block font-medium mb-2">Email Address</label>
+          <input type="email" name="customer_email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+        </div>
+
+        <!-- Address -->
+        <div>
+          <label class="block font-medium mb-2">Delivery/Pickup Address (optional)</label>
+          <input type="text" name="customer_address" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+          <label class="block font-medium mb-2">Phone Number (for updates)</label>
+          <input type="tel" name="customer_phone" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+        </div>
+
+        <!-- Pickup Time -->
+        <div>
+          <label class="block font-medium mb-2">Pickup Time</label>
+          <select name="pickup_time" required class="w-full border border-gray-300 rounded px-4 py-2">
+            <option value="12:00 PM">12:00 PM</option>
+            <option value="12:30 PM">12:30 PM</option>
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="1:30 PM">1:30 PM</option>
+            <option value="2:00 PM">2:00 PM</option>
+          </select>
+        </div>
+
+        <!-- Selected Dishes -->
+        <div>
+          <h3 class="font-serif font-bold mb-4">Selected Dishes</h3>
+          {% for item in menu_items %}
+          <div class="flex items-center mb-4">
+            <input type="checkbox" name="item_id" value="{{ item.id }}" class="mr-4 h-5 w-5">
+            <span class="font-semibold">{{ item.name }}</span>
+            <input type="number" name="quantity" min="1" value="1" class="w-16 ml-4 border border-gray-300 rounded px-2 py-1">
+            <input type="text" name="instructions_{{ item.id }}" placeholder="Special instructions" class="ml-4 border border-gray-300 rounded px-4 py-2 w-full md:w-2/3 lg:w-1/2">
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-full transition duration-300">Submit Order</button>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-4">Pastalux</h3>
+        <p class="text-gray-300">Gourmet artisanal pasta made fresh daily in Luxembourg. Italian craft with local soul.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="{{ url_for('home') }}" class="text-gray-300 hover:text-white">Home</a></li>
+          <li><a href="{{ url_for('menu') }}" class="text-gray-300 hover:text-white">Menu</a></li>
+          <li><a href="{{ url_for('locations') }}" class="text-gray-300 hover:text-white">Locations</a></li>
+          <li><a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white">About</a></li>
+          <li><a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="mt-4 text-gray-400">Stay updated with our latest stops and specials.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Pastalux. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Get in touch with Pastalux – Luxembourg's gourmet food truck serving fresh artisanal pasta. Contact us for orders, events, or questions."/>
+  <title>Contact Pastalux | Get in Touch</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E27358',   // Terra Cotta
+            secondary: '#6C917B', // Sage Green
+            accent: '#F4C042',    // Saffron Yellow
+            dark: '#2D2D2D',
+            light: '#F9F8F7'
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat :wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- OG Tags / SEO -->
+  <meta property="og:title" content="Contact Pastalux - Get in Touch" />
+  <meta property="og:description" content="Have a question or want to book Pastalux for an event? Use our contact form or reach out directly." />
+  <meta property="og:image" content="{{ url_for('static', filename='images/og-contact.jpg', _external=True) }}" />
+  <meta property="og:url" content="https://pastalux.lu/contact.html " />
+</head>
+<body class="bg-light text-dark font-sans leading-relaxed">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="{{ url_for('home') }}" class="text-2xl font-serif font-bold text-primary">Pastalux</a>
+      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+        <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+        <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+        <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+        <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+        <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+      </nav>
+      <button id="mobile-menu-toggle" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-inner">
+      <a href="{{ url_for('home') }}" class="block py-2 hover:text-secondary">Home</a>
+      <a href="{{ url_for('menu') }}" class="block py-2 hover:text-secondary">Menu</a>
+      <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+      <a href="{{ url_for('about') }}" class="block py-2 hover:text-secondary">About</a>
+      <a href="{{ url_for('contact') }}" class="block py-2 hover:text-secondary">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='images/hero-pasta-closeup.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center text-white">
+      <h1 class="text-5xl md:text-6xl font-serif font-bold mb-4">Get in Touch</h1>
+      <p class="text-xl max-w-xl mx-auto">We'd love to hear from you — whether it's about our menu, locations, or events.</p>
+      <a href="#catering-form" class="inline-block bg-primary hover:bg-secondary text-white font-semibold px-8 py-3 rounded-lg transition duration-300 transform hover:scale-105">Send Us a Message</a>
+    </div>
+  </section>
+
+  <!-- Contact Form + Info -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Contact Form -->
+  <form id="contact-form" class="space-y-6" method="post" action="/contact">
+    <div>
+      <label for="name" class="block font-medium mb-2">Name</label>
+      <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+    </div>
+    <div>
+      <label for="email" class="block font-medium mb-2">Email Address</label>
+      <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none">
+    </div>
+    <div>
+      <label for="message" class="block font-medium mb-2">Your Message</label>
+      <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary outline-none"></textarea>
+    </div>
+    <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-full transition duration-300">Send Message</button>
+  </form>      <!-- Contact Info & FAQs -->
+      <div>
+        <h2 class="text-3xl font-serif font-bold mb-6">Contact Details</h2>
+        <!-- Contact Info -->
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>hello@pastalux.lu</span>
+          </li>
+          <li class="flex items-start space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 00-.502 1.21l-2.257 1.13a1 1 0 01-1.21-.502l-4.493-1.498a1 1 0 00-1.41 0l-2.257 1.13a1 1 0 01-1.21-.502L5 7.586 3.28 4.8A1 1 0 013 3h7.69l2 1.812a1 1 0 00.948-.684Z" />
+            </svg>
+            <span>+352 691 000 000</span>
+          </li>
+          <li class="flex items-start space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>We're on the move! Check our <a href="{{ url_for('locations') }}" class="underline hover:text-secondary">Locations Page</a> for where we'll be next.</span>
+          </li>
+        </ul>
+        <!-- Social Links -->
+        <div class="mb-8">
+          <h3 class="font-serif font-bold text-lg mb-3">Follow Us</h3>
+          <div class="flex space-x-4">
+            <a href="#" aria-label="Instagram" class="text-primary hover:text-secondary"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="#" aria-label="Facebook" class="text-primary hover:text-secondary"><i class="fab fa-facebook-f text-2xl"></i></a>
+            <a href="#" aria-label="TikTok" class="text-primary hover:text-secondary"><i class="fab fa-tiktok text-2xl"></i></a>
+          </div>
+        </div>
+        <!-- Catering Inquiry -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+          <h3 class="font-serif font-bold text-lg mb-2">Planning an Event?</h3>
+          <p class="text-gray-700 mb-4">We'd love to bring Pastalux to your next party, wedding, or corporate event!</p>
+          <a href="#catering-form" class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-primary transition duration-300">Inquire About Catering</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="py-16 bg-light">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto space-y-4">
+        <!-- FAQ Item -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <button class="faq-question w-full text-left px-6 py-4 font-medium flex justify-between items-center">
+            Do you offer gluten-free pasta options?
+            <svg class="faq-icon h-5 w-5 transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 hidden">
+            Yes! We offer gluten-free pasta upon request for most of our dishes. Just let us know when ordering.
+          </div>
+        </div>
+        <!-- FAQ Item -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <button class="faq-question w-full text-left px-6 py-4 font-medium flex justify-between items-center">
+            Are you open every day?
+            <svg class="faq-icon h-5 w-5 transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 hidden">
+            We operate Monday through Friday, with occasional weekend appearances at festivals and markets. Check our Locations page for updates!
+          </div>
+        </div>
+        <!-- FAQ Item -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <button class="faq-question w-full text-left px-6 py-4 font-medium flex justify-between items-center">
+            Can I order in advance?
+            <svg class="faq-icon h-5 w-5 transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 hidden">
+            Not yet — but we're working on it! For now, just come by during our hours and we’ll make your pasta fresh on the spot.
+          </div>
+        </div>
+        <!-- FAQ Item -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <button class="faq-question w-full text-left px-6 py-4 font-medium flex justify-between items-center">
+            Do you accept credit cards?
+            <svg class="faq-icon h-5 w-5 transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6 pb-4 hidden">
+            Absolutely! We accept Visa, Mastercard, and cash payments.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-4">Pastalux</h3>
+        <p class="text-gray-300">Gourmet artisanal pasta made fresh daily in Luxembourg. Italian craft with local soul.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+          <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+          <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+          <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+          <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="mt-4 text-gray-400">Stay updated with our latest stops and specials.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Pastalux. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous"></script>
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      var menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+  <!-- FAQ Toggle Script -->
+  <script>
+    const questions = document.querySelectorAll('.faq-question');
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const icon = q.querySelector('.faq-icon');
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Explore Pastalux's gourmet artisanal pasta menu. Fresh daily, made from locally sourced ingredients in Luxembourg."/>
+  <title>Pastalux Menu | Gourmet Artisanal Pasta</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E27358',
+            secondary: '#6C917B',
+            accent: '#F4C042',
+            dark: '#2D2D2D',
+            light: '#F9F8F7'
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat :wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- OG Tags / SEO -->
+  <meta property="og:title" content="Pastalux Menu - Artisanal Pasta in Luxembourg" />
+  <meta property="og:description" content="Browse our fresh-made pasta dishes crafted daily using local ingredients." />
+  <meta property="og:image" content="{{ url_for('static', filename='images/hero-pasta-toss.jpg', _external=True) }}">
+  <meta property="og:url" content="https://pastalux.lu/menu.html " />
+</head>
+<body class="bg-light text-dark font-sans leading-relaxed">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="{{ url_for('home') }}" class="text-2xl font-serif font-bold text-primary">Pastalux</a>
+      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+        <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+        <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+        <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+        <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+        <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+      </nav>
+      <button id="mobile-menu-toggle" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-inner">
+      <a href="{{ url_for('home') }}" class="block py-2 hover:text-secondary">Home</a>
+      <a href="{{ url_for('menu') }}" class="block py-2 hover:text-secondary">Menu</a>
+      <a href="{{ url_for('locations') }}" class="block py-2 hover:text-secondary">Locations</a>
+      <a href="{{ url_for('about') }}" class="block py-2 hover:text-secondary">About</a>
+      <a href="{{ url_for('contact') }}" class="block py-2 hover:text-secondary">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-16 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='images/hero-pasta-closeup.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center text-white">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Our Menu</h1>
+      <p class="text-xl max-w-xl mx-auto">Handmade pasta, fresh ingredients, and bold flavors — all served fast from our truck.</p>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <section class="sticky top-16 z-30 bg-white shadow-sm py-4">
+    <div class="container mx-auto px-6 flex flex-wrap gap-2 justify-center">
+      <button class="filter-btn active px-4 py-2 rounded-full bg-primary text-white text-sm font-medium transition">All</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 transition duration-300">Classic</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 transition duration-300">Seasonal</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 transition duration-300">Sides</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 transition duration-300">Drinks</button>
+      <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 transition duration-300">Desserts</button>
+    </div>
+  </section>
+
+  <!-- Today's Special -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-2xl font-serif font-bold mb-6">Today’s Special</h2>
+      <div class="flex flex-col md:flex-row items-center bg-gray-50 p-6 rounded-lg shadow-sm">
+        <img src="{{ url_for('static', filename='images/dish-today-special.jpg') }}" alt="Lemon Ricotta Ravioli" class="w-full md:w-1/3 h-48 object-cover rounded-lg mb-4 md:mb-0 md:mr-6">
+        <div>
+          <h3 class="text-xl font-serif font-bold mb-2">Lemon Ricotta Ravioli</h3>
+          <p class="text-gray-700 mb-4">Delicate ravioli filled with lemon-infused ricotta, tossed with brown butter and sage.</p>
+          <span class="inline-block bg-accent text-dark text-xs px-2 py-1 rounded-full mr-2">Vegetarian</span>
+          <span class="inline-block bg-secondary text-white text-xs px-2 py-1 rounded-full">Seasonal</span>
+          <p class="mt-4 text-lg font-semibold">€11.50</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Grid -->
+  <section class="py-12 bg-light">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Our Dishes</h2>
+      <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for item in items %}
+        <div data-category="{{ item.category }}" class="dish-card bg-white rounded-lg shadow-md overflow-hidden transform hover:shadow-xl transition duration-300">
+          <img src="{{ url_for('static', filename='images/' ~ item.image_filename) }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold mb-2">{{ item.name }}</h3>
+            <p class="text-gray-600 mb-4">{{ item.description }}</p>
+            <div class="flex justify-between items-center">
+              <span class="font-semibold">€{{ item.price }}</span>
+              <div class="flex space-x-1">
+                {% if item.vegetarian %}
+                  <span class="inline-block bg-secondary text-white text-xs px-2 py-1 rounded-full">Vegetarian</span>
+                {% endif %}
+                {% if item.gluten_free %}
+                  <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">GF Option</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Build Your Own Pasta -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-8">Build Your Own Pasta</h2>
+      <div class="max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg shadow-inner">
+        <form id="build-your-pasta-form" method="post" action="/order" class="space-y-6">
+          <div>
+            <label class="block font-medium mb-2">Pasta Base</label>
+            <select class="w-full border border-gray-300 rounded px-4 py-2">
+              <option>Spaghetti</option>
+              <option>Penne</option>
+              <option>Fettuccine</option>
+              <option>Rigatoni</option>
+              <option>Gluten-Free Option</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium mb-2">Sauce</label>
+            <select class="w-full border border-gray-300 rounded px-4 py-2">
+              <option>Tomato & Basil</option>
+              <option>Creamy Alfredo</option>
+              <option>Pesto Genovese</option>
+              <option>Aglio e Olio</option>
+              <option>Meat Ragu</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium mb-2">Protein</label>
+            <select class="w-full border border-gray-300 rounded px-4 py-2">
+              <option>None</option>
+              <option>Grilled Chicken</option>
+              <option>Shrimp</option>
+              <option>Italian Sausage</option>
+              <option>Mushrooms (Vegan)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium mb-2">Toppings</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="rounded text-primary focus:ring-secondary"> <span>Parmesan</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="rounded text-primary focus:ring-secondary"> <span>Chili Flakes</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="rounded text-primary focus:ring-secondary"> <span>Pecorino</span>
+              </label>
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="rounded text-primary focus:ring-secondary"> <span>Burrata</span>
+              </label>
+            </div>
+          </div>
+          <a href="{{ url_for('order') }}" class="block w-full text-center bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-full transition duration-300">Add to Order</a>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-4">Pastalux</h3>
+        <p class="text-gray-300">Gourmet artisanal pasta made fresh daily in Luxembourg. Italian craft with local soul.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="{{ url_for('home') }}" class="text-gray-300 hover:text-white">Home</a></li>
+          <li><a href="{{ url_for('menu') }}" class="text-gray-300 hover:text-white">Menu</a></li>
+          <li><a href="{{ url_for('locations') }}" class="text-gray-300 hover:text-white">Locations</a></li>
+          <li><a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white">About</a></li>
+          <li><a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="mt-4 text-gray-400">Stay updated with our latest stops and specials.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Pastalux. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous"></script>
+
+  <!-- JavaScript for Filtering -->
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const dishCards = document.querySelectorAll('.dish-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.textContent.trim().toLowerCase();
+
+        dishCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      var menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

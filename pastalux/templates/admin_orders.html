@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Orders</title>
+</head>
+<body>
+  <h2>All Orders</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Pickup Time</th>
+      <th>Total</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.id }}</td>
+      <td>{{ order.customer_name }}</td>
+      <td>{{ order.customer_email }}</td>
+      <td>{{ order.pickup_time }}</td>
+      <td>€{{ '%0.2f' % order.total_price }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{{ url_for('admin_messages') }}">View Messages</a>
+</body>
+</html>

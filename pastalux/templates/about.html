@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn the story behind Pastalux — Luxembourg's gourmet food truck serving fresh artisanal pasta made from locally sourced ingredients."/>
+  <title>About Pastalux | Our Story</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E27358',   // Terra Cotta
+            secondary: '#6C917B', // Sage Green
+            accent: '#F4C042',    // Saffron Yellow
+            dark: '#2D2D2D',
+            light: '#F9F8F7'
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico"/>
+
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat :wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- OG Tags / SEO -->
+  <meta property="og:title" content="About Pastalux - Our Story" />
+  <meta property="og:description" content="How Pastalux started – a passion for Italian pasta meets Luxembourgish soul." />
+  <meta property="og:image" content="{{ url_for('static', filename='images/og-about.jpg') }}" />
+  <meta property="og:url" content="https://pastalux.lu/about.html " />
+</head>
+<body class="bg-light text-dark font-sans leading-relaxed">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="{{ url_for('home') }}" class="text-2xl font-serif font-bold text-primary">Pastalux</a>
+    <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+      <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+      <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+      <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+      <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+      <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+      </nav>
+      <button id="mobile-menu-toggle" class="md:hidden focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-inner">
+        <a href="{{ url_for('home') }}" class="hover:text-secondary transition duration-300">Home</a>
+        <a href="{{ url_for('menu') }}" class="hover:text-secondary transition duration-300">Menu</a>
+        <a href="{{ url_for('locations') }}" class="hover:text-secondary transition duration-300">Locations</a>
+        <a href="{{ url_for('about') }}" class="hover:text-secondary transition duration-300">About</a>
+        <a href="{{ url_for('contact') }}" class="hover:text-secondary transition duration-300">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='images/hero-team-in-kitchen.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center text-white">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Our Story</h1>
+      <p class="text-xl max-w-xl mx-auto">How a love for pasta led to a gourmet food truck on the streets of Luxembourg.</p>
+    </div>
+  </section>
+
+  <!-- Origin Story -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-serif font-bold mb-6">From Passion to Pasta</h2>
+        <p class="text-lg text-gray-700 mb-6">
+          It all began with a simple craving — real, handmade pasta that didn’t take hours to make or cost a fortune.
+        </p>
+        <p class="text-lg text-gray-700 mb-6">
+          After years of traveling through Italy and working in restaurants across Europe, our founder returned to Luxembourg with a dream: bring the soul of Italian pasta-making to the streets — fast, fresh, and full of flavor.
+        </p>
+        <p class="text-lg text-gray-700 mb-6">
+          And so, Pastalux was born — a food truck that serves only what we’d eat ourselves: pasta made daily, sauces simmered slowly, and ingredients sourced locally whenever possible.
+        </p>
+        <p class="text-lg text-gray-700">
+          We believe good food doesn’t need to be complicated — just made with care, served with a smile, and enjoyed wherever life takes you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="py-16 bg-light">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Our Values</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <!-- Value Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <img src="{{ url_for('static', filename='images/icon-freshness.png') }}" alt="Fresh Ingredients" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-serif font-bold mb-2">Freshness First</h3>
+          <p class="text-gray-600">We make everything fresh daily — no shortcuts, no preservatives, no regrets.</p>
+        </div>
+
+        <!-- Value Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <img src="{{ url_for('static', filename='images/icon-local.png') }}" alt="Local Partnerships" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-serif font-bold mb-2">Local Roots</h3>
+          <p class="text-gray-600">We work with farmers and producers across Luxembourg to source seasonal, sustainable ingredients.</p>
+        </div>
+
+        <!-- Value Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <img src="{{ url_for('static', filename='images/icon-craft.png') }}" alt="Craftsmanship" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-serif font-bold mb-2">Timeless Craft</h3>
+          <p class="text-gray-600">Every dish honors traditional techniques while embracing modern creativity and speed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-serif font-bold text-center mb-12">Meet the Faces Behind the Pasta</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Team Member -->
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='images/team-founder.jpg') }}" alt="Founder Name" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-md">
+          <h3 class="text-xl font-serif font-bold">Amel, Inês, Guilherme, Mariana</h3>
+          <p class="text-gray-600">Founders & Head Chefs</p>
+          <p class="mt-2 text-sm text-gray-500">The geniuses behind the recipes and the guys who makes sure every bite tastes like home.</p>
+        </div>
+
+        <!-- Team Member -->
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='images/team-chef.jpg') }}" alt="Chef Name" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-md">
+          <h3 class="text-xl font-serif font-bold">Sophie Lambert</h3>
+          <p class="text-gray-600">Sous Chef & Flavor Architect</p>
+          <p class="mt-2 text-sm text-gray-500">She brings a touch of Luxembourgish flair to every dish and keeps the kitchen running smoothly.</p>
+        </div>
+
+        <!-- Team Member -->
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='images/team-truck.jpg') }}" alt="Truck Operator Name" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-md">  
+          <h3 class="text-xl font-serif font-bold">Amel</h3>
+          <p class="text-gray-600">Truck Captain</p>
+          <p class="mt-2 text-sm text-gray-500">He drives the truck, sets up shop, and always knows the best parking spot in town.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-secondary text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-serif font-bold mb-6">Hungry to Learn More?</h2>
+      <p class="text-xl mb-8 max-w-xl mx-auto">Follow us on social media or come say hello at one of our stops!</p>
+      <a href="{{ url_for('locations') }}" class="inline-block bg-white text-secondary font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition duration-300">Find Us Today</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-10">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-4">Pastalux</h3>
+        <p class="text-gray-300">Gourmet artisanal pasta made fresh daily in Luxembourg. Italian craft with local soul.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
+          <li><a href="menu.html" class="text-gray-300 hover:text-white">Menu</a></li>
+          <li><a href="locations.html" class="text-gray-300 hover:text-white">Locations</a></li>
+          <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+          <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok" class="text-gray-300 hover:text-white"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="mt-4 text-gray-400">Stay updated with our latest stops and specials.</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Pastalux. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous"></script>
+
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      var menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
