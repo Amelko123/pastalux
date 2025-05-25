@@ -1,15 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os  # Needed for environment variables
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pastalux.sqlite'
+
+# Use DATABASE_URL if available (Render), otherwise fall back to local SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///pastalux.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 
 # --- MODELS ---
-
 class MenuItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -81,6 +84,9 @@ def contact():
         email = request.form.get('email')
         message = request.form.get('message')
 
+        if not name or not email or not message:
+            return "Missing required fields", 400
+
         # Save to database
         new_message = ContactMessage(name=name, email=email, message=message)
         db.session.add(new_message)
@@ -105,14 +111,12 @@ def admin_messages():
 @app.route('/order', methods=['GET', 'POST'])
 def order():
     if request.method == 'POST':
-        # Get customer details
         name = request.form.get('customer_name')
         email = request.form.get('customer_email')
         address = request.form.get('customer_address')
         phone = request.form.get('customer_phone')
         pickup_time = request.form.get('pickup_time')
 
-        # Get selected dishes
         item_ids = request.form.getlist('item_id')
         quantities = request.form.getlist('quantity')
 
@@ -131,7 +135,10 @@ def order():
                     quantity=qty
                 ))
 
-        # Create order
+        if not name or not email or not pickup_time:
+            return "Missing required customer information", 400
+
+        # Create new order
         new_order = Order(
             customer_name=name,
             customer_email=email,
@@ -239,4 +246,6 @@ if __name__ == '__main__':
             ))
             db.session.commit()
 
-    app.run(debug=True)
+    # Use $PORT if available (on hosting platforms), else fallback to 5000
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
